@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BaseM.CalculatorPage">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+            <Label Text="Number:" FontSize="Large" VerticalOptions="Center"/>
+            <Entry x:Name="numberEntry" FontSize="Large" Placeholder="Number" HorizontalOptions="Fill"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+            <Label Text="Result:" FontSize="Large"/>
+            <Label x:Name="resultLabel" FontSize="Large" />
+        </StackLayout>
+        <Button x:Name="okayButton" Text="Okay" FontSize="Large"
+                VerticalOptions="EndAndExpand" Clicked="okayButton_Clicked"/>
+    </StackLayout>
+</ContentPage>
