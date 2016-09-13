@@ -8,6 +8,8 @@ namespace BaseM
 {
     public static class Translator
     {
+        public const string ZERO = "0";
+        public const string UNKNOWN = "Unknown";
         public static string Translate(string number, NumericSystem fromSystem, NumericSystem toSystem)
         {
             if (number == null)
@@ -15,7 +17,13 @@ namespace BaseM
             if (number == string.Empty)
                 return "0";
 
-            long dec = ChangeToDecimal(number, fromSystem);
+            string result = ChangeToDecimal(number, fromSystem);
+            long dec;
+
+            if (result == UNKNOWN)
+                return result;
+            else
+                dec = Convert.ToInt64(result);
 
             StringBuilder builder = new StringBuilder();
             int digits = (int)toSystem;
@@ -30,7 +38,7 @@ namespace BaseM
             return builder.ToString();
         }
 
-        private static long ChangeToDecimal(string number, NumericSystem originalSystem)
+        private static string ChangeToDecimal(string number, NumericSystem originalSystem)
         {
             if (string.IsNullOrWhiteSpace(number))
                 throw new ArgumentNullException("number", "'number' can't be null or empty.");
@@ -42,9 +50,9 @@ namespace BaseM
                 long result;
                 bool succeed = long.TryParse(number, out result);
                 if (succeed)
-                    return result;
+                    return result.ToString();
                 else
-                    return 0;
+                    return UNKNOWN;
             }
             else
             {
@@ -58,7 +66,7 @@ namespace BaseM
                     totalNumber += CharToInt(number[i]) * weight;
                 }
 
-                return totalNumber;
+                return totalNumber.ToString();
             }
 
         }
