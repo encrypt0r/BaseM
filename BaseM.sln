@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseM", "BaseM\BaseM\BaseM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseM.Tests", "BaseM.Tests\BaseM.Tests.csproj", "{C42070E9-F7BD-4559-9830-5C4F19E32298}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C408A956-5B83-45E4-8B69-1A33FE12AB37}"
+	ProjectSection(SolutionItems) = preProject
+		BaseM.testsettings = BaseM.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
