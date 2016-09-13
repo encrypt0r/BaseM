@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<test>
+  <convert>
+    <number>25</number>
+    <result>11001</result>
+    <from>decimal</from>
+    <to>binary</to>
+  </convert>
+
+  <convert>
+    <number>876623</number>
+    <result>11010110000001001111</result>
+    <from>decimal</from>
+    <to>binary</to>
+  </convert>
+
+  <convert>
+    <number>09823</number>
+    <result>10011001011111</result>
+    <from>decimal</from>
+    <to>binary</to>
+  </convert>
+</test>
