@@ -17,7 +17,7 @@ namespace BaseM
 
         private void okayButton_Clicked(object sender, EventArgs e)
         {
-            resultLabel.Text = Translator.Translate(numberEntry.Text, NumericSystem.Decimal, NumericSystem.Binary);
+            resultLabel.Text = Translator.Translate(numberEntry.Text, NumericSystem.Hexadecimal, NumericSystem.Octal);
         }
     }
 }

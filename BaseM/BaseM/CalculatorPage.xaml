@@ -12,7 +12,6 @@
             <Label Text="Result:" FontSize="Large"/>
             <Label x:Name="resultLabel" FontSize="Large" />
         </StackLayout>
-        <Button x:Name="okayButton" Text="Okay" FontSize="Large"
-                VerticalOptions="EndAndExpand" Clicked="okayButton_Clicked"/>
+        <Button x:Name="okayButton" Text="Okay" FontSize="Large" Clicked="okayButton_Clicked"/>
     </StackLayout>
 </ContentPage>

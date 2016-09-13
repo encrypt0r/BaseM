@@ -81,7 +81,7 @@ namespace BaseM
                 for (int i = 0; i < letters.Count(); i++)
                 {
                     if (letters[i] == number)
-                        return i + 9; // because A is the tenth number
+                        return i + 10; // because A is the tenth number
                 }
             }
 
