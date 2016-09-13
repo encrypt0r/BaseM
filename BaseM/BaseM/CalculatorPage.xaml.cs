@@ -11,76 +11,65 @@ namespace BaseM
     public partial class CalculatorPage : ContentPage
     {
         public string Number { get; set; }
-        public NumericSystem System { get; set; }
-        List<Label> labels = new List<Label>();
+        public NumericSystem OriginalSystem { get; set; }
+
+        List<Label> _resultLabels = new List<Label>();
+        // Systems that the number must be converted to
+        List<NumericSystem> _targetSystems = new List<NumericSystem>();
 
         public CalculatorPage()
         {
             InitializeComponent();
 
-            System = NumericSystem.Decimal;
+            OriginalSystem = NumericSystem.Decimal;
             Number = "0";
             SystemPicker.SelectedIndex = 2;
-            ResetLabels(System);
         }
 
         private void SystemPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
-            switch (picker.Items[picker.SelectedIndex].ToLowerInvariant())
+            List<NumericSystem> systems = new List<NumericSystem> { NumericSystem.Binary, NumericSystem.Octal, NumericSystem.Decimal, NumericSystem.Hexadecimal };
+
+            foreach (var sys in systems)
             {
-                case "binary":
-                    System = NumericSystem.Binary;
-                    break;
-                case "octal":
-                    System = NumericSystem.Octal;
-                    break;
-                case "decimal":
-                    System = NumericSystem.Decimal;
-                    break;
-                case "hexadecimal":
-                    System = NumericSystem.Hexadecimal;
-                    break;
+                if (picker.Items[picker.SelectedIndex].ToLowerInvariant() == sys.ToString().ToLowerInvariant())
+                    OriginalSystem = sys;
             }
 
-            if (System == NumericSystem.Hexadecimal)
-                numberEntry.Keyboard = Keyboard.Chat;
+            if (OriginalSystem == NumericSystem.Hexadecimal)
+                numberEntry.Keyboard = Keyboard.Default;
             else
                 numberEntry.Keyboard = Keyboard.Numeric;
-            ResetLabels(System);
+
+            _targetSystems = GetTargetSystems(OriginalSystem);
+            ResetLabels();
         }
 
-        private void ResetLabels(NumericSystem system)
+        private void ResetLabels()
         {
-            string[] names = { "BIN", "OCT", "DEC", "HEX" };
-            string sysName = system.ToString().Substring(0, 3).ToUpper();
-
             resultStack.Children.Clear();
-            labels.Clear();
+            _resultLabels.Clear();
 
-            for (int i = 0; i < names.Length; i++)
+            for (int i = 0; i < _targetSystems.Count(); i++)
             {
-                var name = names[i];
-                if (name == sysName) continue;
-
+                var name = _targetSystems[i].ToString().Substring(0, 3).ToUpper();
                 var nameLabel = new Label
                 {
                     FontAttributes = FontAttributes.Bold,
-                    Text = name + ": "
+                    Text = name + ": ",
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
                 };
 
                 var valueLabel = new Label();
                 valueLabel.Text = "0";
-
-                labels.Add(valueLabel);
+                valueLabel.FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+                
+                _resultLabels.Add(valueLabel);
 
                 var grid = new Grid
                 {
-                    ColumnDefinitions =
-                    {
-                        new ColumnDefinition { Width = 50 },
-                        new ColumnDefinition()
-                    },
+                    ColumnDefinitions = { new ColumnDefinition { Width = 50 }, new ColumnDefinition() },
                     Children = { nameLabel, valueLabel }
                 };
 
@@ -88,25 +77,34 @@ namespace BaseM
                 resultStack.Children.Add(grid);
             }
 
-            CalculateResults(Number, System);
+            CalculateResults(Number, OriginalSystem);
         }
 
         private void CalculateResults(string number, NumericSystem from)
         {
-            List<NumericSystem> systems = new List<NumericSystem> { NumericSystem.Binary, NumericSystem.Octal, NumericSystem.Decimal, NumericSystem.Hexadecimal };
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (systems[i].ToString() == from.ToString())
-                    continue;
-                labels[i].Text = Translator.Translate(number, from, systems[i]);
-            }
+            for (int i = 0; i < _targetSystems.Count; i++)
+                _resultLabels[i].Text = Translator.Translate(number, from, _targetSystems[i]);
         }
 
         private void numberEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
             Number = numberEntry.Text;
-            CalculateResults(Number, System);
+            CalculateResults(Number, OriginalSystem);
+        }
+
+        private List<NumericSystem> GetTargetSystems(NumericSystem selectedSystem)
+        {
+            List<NumericSystem> systems = new List<NumericSystem> { NumericSystem.Binary, NumericSystem.Octal, NumericSystem.Decimal, NumericSystem.Hexadecimal };
+            var returnList = new List<NumericSystem>();
+
+            foreach (var sys in systems)
+            {
+                if (sys == selectedSystem)
+                    continue;
+                returnList.Add(sys);
+            }
+
+            return returnList;
         }
     }
 }

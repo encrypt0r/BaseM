@@ -10,22 +10,21 @@
 
 
     <StackLayout>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Entry x:Name="numberEntry" Grid.Column="0" FontSize="Large" Placeholder="Number" HorizontalOptions="Fill" TextChanged="numberEntry_TextChanged"/>
-            <Picker Title="Selected System" Grid.Column="1" x:Name="SystemPicker" SelectedIndexChanged="SystemPicker_SelectedIndexChanged">
-                <Picker.Items>
-                    <x:String>Binary</x:String>
-                    <x:String>Octal</x:String>
-                    <x:String>Decimal</x:String>
-                    <x:String>Hexadecimal</x:String>
-                </Picker.Items>
-            </Picker>
-        </Grid>
-        <StackLayout x:Name="resultStack"/>
+       
+        <Picker Title="Selected System" x:Name="SystemPicker" SelectedIndexChanged="SystemPicker_SelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Binary</x:String>
+                <x:String>Octal</x:String>
+                <x:String>Decimal</x:String>
+                <x:String>Hexadecimal</x:String>
+            </Picker.Items>
+        </Picker>
+        
+        <Entry x:Name="numberEntry" FontSize="Large" Placeholder="Number" HorizontalOptions="Fill" TextChanged="numberEntry_TextChanged"/>
+        
+        <Label/> <!--Seperator-->
+        
+        <Label FontSize="Large" Text="Results:"/>
+        <StackLayout  x:Name="resultStack"/>
     </StackLayout>
 </ContentPage>
