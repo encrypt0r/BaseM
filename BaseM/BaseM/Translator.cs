@@ -16,6 +16,8 @@ namespace BaseM
                 throw new ArgumentNullException("number");
             if (number == string.Empty)
                 return "0";
+            if (!IsGoodNumber(number, fromSystem))
+                return UNKNOWN;
 
             string result = ChangeToDecimal(number, fromSystem);
             long dec;
@@ -58,11 +60,11 @@ namespace BaseM
             {
                 // make sure it's done from Least Important to Most
                 number = number.Reverse();
-                int totalNumber = 0;
+                long totalNumber = 0;
 
                 for (int i = 0; i < number.Length; i++)
                 {
-                    int weight = Convert.ToInt32(Math.Pow(systemBase, i));
+                    long weight = Convert.ToInt32(Math.Pow(systemBase, i));
                     totalNumber += CharToInt(number[i]) * weight;
                 }
 
@@ -96,6 +98,28 @@ namespace BaseM
                 throw new ArgumentException("The number should not be greater than 15");
 
             return (possibleDigits[number]);
+        }
+        private static bool IsGoodNumber(string number, NumericSystem system)
+        {
+            char[] possibleDigits = { '0', '1', '2', '3', '4', '5',
+                '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+            int max = (int)system;
+             
+            for (int i = 0; i < number.Length; i++)
+            {
+                int index = 0;
+
+                for (int j = 0; j < possibleDigits.Length; j++)
+                {
+                    if (possibleDigits[j] == number[i])
+                        index = j;
+                }
+
+                if (index > max)
+                    return false;
+            }
+
+            return true;
         }
         private static string Reverse(this string s)
         {
