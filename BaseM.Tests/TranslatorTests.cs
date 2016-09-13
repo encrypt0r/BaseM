@@ -31,7 +31,7 @@ namespace BaseM.Tests
         {
             string number = "25";
             string output = "11001";
-            string result = Translator.Translate(number, NumericSystem.Decimal, NumericSystem.Decimal);
+            string result = Translator.Translate(number, NumericSystem.Decimal, NumericSystem.Binary);
             Assert.AreEqual(output, result);
         }
 
