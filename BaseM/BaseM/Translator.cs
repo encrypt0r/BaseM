@@ -64,7 +64,9 @@ namespace BaseM
 
                 for (int i = 0; i < number.Length; i++)
                 {
-                    long weight = Convert.ToInt32(Math.Pow(systemBase, i));
+                    long weight;
+                    bool succeed = long.TryParse(Math.Pow(systemBase, i).ToString(), out weight);
+                    if (!succeed) return UNKNOWN;
                     totalNumber += CharToInt(number[i]) * weight;
                 }
 
