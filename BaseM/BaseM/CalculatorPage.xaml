@@ -1,17 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BaseM"
              x:Class="BaseM.CalculatorPage">
-    <StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-            <Label Text="Number:" FontSize="Large" VerticalOptions="Center"/>
-            <Entry x:Name="numberEntry" FontSize="Large" Placeholder="Number" HorizontalOptions="Fill"/>
-        </StackLayout>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="5, 20, 0, 5" Android="5, 0"/>
+    </ContentPage.Padding>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-            <Label Text="Result:" FontSize="Large"/>
-            <Label x:Name="resultLabel" FontSize="Large" />
-        </StackLayout>
-        <Button x:Name="okayButton" Text="Okay" FontSize="Large" Clicked="okayButton_Clicked"/>
+
+
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry x:Name="numberEntry" Grid.Column="0" FontSize="Large" Placeholder="Number" HorizontalOptions="Fill" TextChanged="numberEntry_TextChanged"/>
+            <Picker Title="Selected System" Grid.Column="1" x:Name="SystemPicker" SelectedIndexChanged="SystemPicker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>Binary</x:String>
+                    <x:String>Octal</x:String>
+                    <x:String>Decimal</x:String>
+                    <x:String>Hexadecimal</x:String>
+                </Picker.Items>
+            </Picker>
+        </Grid>
+        <StackLayout x:Name="resultStack"/>
     </StackLayout>
 </ContentPage>
