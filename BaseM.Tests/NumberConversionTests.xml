@@ -20,4 +20,53 @@
     <from>decimal</from>
     <to>binary</to>
   </convert>
+
+  <convert>
+    <number>7642</number>
+    <result>FA2</result>
+    <from>octal</from>
+    <to>hexadecimal</to>
+  </convert>
+
+  <convert>
+    <number>FA123BC</number>
+    <result>1750221674</result>
+    <from>hexadecimal</from>
+    <to>octal</to>
+  </convert>
+
+  <convert>
+    <number>7642</number>
+    <result>FA2</result>
+    <from>octal</from>
+    <to>hexadecimal</to>
+  </convert>
+
+  <convert>
+    <number>11111000100101</number>
+    <result>3E25</result>
+    <from>binary</from>
+    <to>hexadecimal</to>
+  </convert>
+
+  <convert>
+    <number>98234</number>
+    <result>277672</result>
+    <from>decimal</from>
+    <to>octal</to>
+  </convert>
+
+  <convert>
+    <number>99838737262386</number>
+    <result>5ACD84782732</result>
+    <from>decimal</from>
+    <to>hexadecimal</to>
+  </convert>
+
+  <convert>
+    <number>1232234723</number>
+    <result>1010011010010011100111010011</result>
+    <from>octal</from>
+    <to>binary</to>
+  </convert>
 </test>
